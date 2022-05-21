@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 const Navigation = () => {
   const navItems = <>   <li><Link to="/" className='font-bold'>Home</Link></li>
-  <li tabindex="0">
-    <Link to="/about" class="justify-between font-bold">
+  <li tabIndex="0">
+    <Link to="/about" className="justify-between font-bold">
    About
   
     </Link>
@@ -13,26 +13,26 @@ const Navigation = () => {
   <li><Link to="/blog" className='font-bold'>Blog</Link></li>
   <li><Link to="/dashboard" className='font-bold'>Dashboard</Link></li></>
     return (
-        <div class="navbar  bg-primary">
-        <div class="navbar-start ">
-          <div class="dropdown">
-            <label tabindex="0" class="btn btn-ghost lg:hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+        <div className="navbar  bg-primary">
+        <div className="navbar-start ">
+          <div className="dropdown">
+            <label tabIndex="0" className="btn btn-ghost lg:hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
             </label>
-            <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-screen">
+            <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-screen">
               {navItems}
             </ul>
           </div>
-          <Link to="/" class="btn btn-ghost normal-case text-xl font-bold">Heavy Duty Tools</Link>
+          <Link to="/" className="btn btn-ghost normal-case text-xl font-bold">Heavy Duty Tools</Link>
         </div>
-        <div class="navbar-center hidden lg:flex  ">
-          <ul class="menu menu-horizontal p-0 ">
+        <div className="navbar-center hidden lg:flex  ">
+          <ul className="menu menu-horizontal p-0 ">
           {navItems}
           </ul>
         </div>
-        <div class="navbar-end ">
-          <Link to="/login" class="btn btn-sm mx-5" >Login</Link>
-          <Link to="/signup" class="btn btn-sm" >Signup</Link>
+        <div className="navbar-end ">
+          <Link to="/login" className="btn btn-sm mx-5" >Login</Link>
+          <Link to="/signup" className="btn btn-sm" >Signup</Link>
         </div>
       </div>
     );
