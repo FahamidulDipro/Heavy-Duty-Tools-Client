@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
+import Footer from "../Utilities/Footer";
 import Loading from "../Utilities/Loading";
 import Slider from "../Utilities/Slider";
 import Tool from "../Utilities/Tool";
@@ -18,11 +19,12 @@ const Home = () => {
   return (
     <div>
       <Slider></Slider>
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 grid-cols-1 gap-10 container mx-auto">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 grid-cols-1 gap-10 container mx-auto my-20">
         {tools.map((tool) => (
           <Tool key={tool.id} tool={tool} refetch={refetch}></Tool>
         ))}
       </div>
+      <Footer></Footer>
     </div>
   );
 };
