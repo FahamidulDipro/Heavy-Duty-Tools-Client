@@ -31,31 +31,43 @@ const Purchase = () => {
           <div class="card-body">
             <div class="form-control">
               <label class="label">
+                <span class="label-text">Name</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Name"
+                class="input input-bordered"
+                disabled
+              />
+              <label class="label">
                 <span class="label-text">Email</span>
               </label>
               <input
-                type="text"
-                placeholder="email"
+                type="email"
+                placeholder="Email"
                 class="input input-bordered"
+                disabled
               />
-            </div>
-            <div class="form-control">
               <label class="label">
-                <span class="label-text">Password</span>
+                <span class="label-text">Address</span>
               </label>
               <input
                 type="text"
-                placeholder="password"
+                placeholder="Address"
                 class="input input-bordered"
               />
               <label class="label">
-                <Link to="#" class="label-text-alt link link-hover">
-                  Forgot password?
-                </Link>
+                <span class="label-text">Phone Number</span>
               </label>
+              <input
+                type="text"
+                placeholder="Phone Number"
+                class="input input-bordered"
+              />
             </div>
+            <div class="form-control"></div>
             <div class="form-control mt-6">
-              <button class="btn btn-primary">Login</button>
+              <button class="btn btn-primary">Place Order</button>
             </div>
           </div>
         </div>
