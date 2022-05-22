@@ -1,7 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import {  signOut } from 'firebase/auth';
+
+import { Link, useNavigate } from 'react-router-dom';
+import auth from '../../firebase.init';
+import Loading from '../Utilities/Loading';
 
 const Navigation = () => {
+  const [user,loading]  = useAuthState(auth);
+  const navigate = useNavigate();
+  const handleSignout = ()=>{
+    signOut(auth);
+    navigate('/login');
+  }
   const navItems = <>   <li><Link to="/" className='font-bold'>Home</Link></li>
   <li tabIndex="0">
     <Link to="/about" className="justify-between font-bold">
@@ -11,7 +22,20 @@ const Navigation = () => {
   
   </li>
   <li><Link to="/blog" className='font-bold'>Blog</Link></li>
-  <li><Link to="/dashboard" className='font-bold'>Dashboard</Link></li></>
+  <li><Link to="/dashboard" className='font-bold'>Dashboard</Link></li>
+   <div className='lg:hidden'>{
+     user?<span className='flex items-center'><div class="avatar online">
+     <div class="w-12 rounded-full">
+       <img src={user?.photoURL} alt="userImage" />
+     </div>
+   </div><span><b className='mx-5'> {user?.displayName}</b></span><button className='btn btn-sm mx-5' onClick={handleSignout}>Logout</button></span>:<span>  <Link to="/login" className="btn btn-sm mx-5" >Login</Link>
+     <Link to="/signup" className="btn btn-sm" >Signup</Link></span>}</div>
+           
+
+          
+          </>
+  
+   
     return (
         <div className="navbar  bg-primary sticky top-0 z-50">
         <div className="navbar-start ">
@@ -30,9 +54,19 @@ const Navigation = () => {
           {navItems}
           </ul>
         </div>
-        <div className="navbar-end ">
-          <Link to="/login" className="btn btn-sm mx-5" >Login</Link>
-          <Link to="/signup" className="btn btn-sm" >Signup</Link>
+        <div className="navbar-end lg:visible md:visible sm:invisible invisible">
+          {
+            console.log(user)
+          }
+          {
+            user?<span className='flex items-center'><div class="avatar online">
+            <div class="w-12 rounded-full">
+              <img src={user?.photoURL} alt="userImage" />
+            </div>
+          </div><span><b className='mx-5'> {user?.displayName}</b></span><button className='btn btn-sm mx-5' onClick={handleSignout}>Logout</button></span>:<span>  <Link to="/login" className="btn btn-sm mx-5" >Login</Link>
+            <Link to="/signup" className="btn btn-sm" >Signup</Link></span>
+          }
+        
         </div>
       </div>
     );

@@ -1,10 +1,11 @@
 import React from 'react';
-
+import './Loading.css'
 const Loading = () => {
     return (
-        <div>
-            <button className="btn btn-square loading"></button>
+        <div className='flex justify-center mt-20'>
+             <div className="loader"></div>
         </div>
+       
     );
 };
 
