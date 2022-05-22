@@ -13,7 +13,7 @@ const Navigation = () => {
   <li><Link to="/blog" className='font-bold'>Blog</Link></li>
   <li><Link to="/dashboard" className='font-bold'>Dashboard</Link></li></>
     return (
-        <div className="navbar  bg-primary">
+        <div className="navbar  bg-primary sticky top-0 z-50">
         <div className="navbar-start ">
           <div className="dropdown">
             <label tabIndex="0" className="btn btn-ghost lg:hidden">

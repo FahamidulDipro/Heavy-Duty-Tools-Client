@@ -13,7 +13,9 @@ const Home = () => {
     data: tools,
     isLoading,
     refetch,
-  } = useQuery("toolsData", () => fetch("data.json").then((res) => res.json()));
+  } = useQuery("toolsData", () =>
+    fetch("http://localhost:5000/tools").then((res) => res.json())
+  );
   if (isLoading) {
     return <Loading></Loading>;
   }
