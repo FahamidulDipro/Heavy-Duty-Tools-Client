@@ -48,17 +48,26 @@ const Purchase = () => {
       setQdError(quantityError);
     }
   };
-  const handleOrder = event =>{
+  const handleOrder = (event) => {
     event.preventDefault();
-    const name = event.target.name.value;
-    const email = event.target.email.value;
-    const address = event.target.address.value;
-    const phone = event.target.phone.value;
-    const amount = event.target.amount.value;
-   
-    console.log(name,email,address,phone,amount);
 
-  }
+    const orderData = {
+      name: event.target.name.value,
+      email: event.target.email.value,
+      address: event.target.address.value,
+      phone: event.target.phone.value,
+      amount: event.target.amount.value,
+    };
+    fetch("http://localhost:5000/orders", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(orderData),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
 
   return (
     <div className="hero min-h-screen">
@@ -89,10 +98,9 @@ const Purchase = () => {
               <input
                 type="text"
                 value={user?.displayName}
-                name = "name"
+                name="name"
                 className="input input-bordered disabled:placeholder-black"
                 disabled
-                
               />
               <label className="label">
                 <span className="label-text">Email</span>
@@ -139,13 +147,13 @@ const Purchase = () => {
                   </span>
                   <input
                     type="text"
-                    name = "amount"
+                    name="amount"
                     disabled
                     value={toolsQuantity}
                     className="input input-bordered focus:outline-none disabled:bg-white disabled:placeholder-black "
                   />
                   <span
-                  onClick={handleIncreaseQuantity}
+                    onClick={handleIncreaseQuantity}
                     className={`cursor-pointer ${
                       qError ? " bg-gray-300" : "bg-primary"
                     }`}
@@ -155,16 +163,16 @@ const Purchase = () => {
                 </label>
               </div>
               <div className="form-control mt-6">
-              <button type="submit" className="btn btn-primary" >Place Order</button>
-            </div>
+                <button type="submit" className="btn btn-primary">
+                  Place Order
+                </button>
+              </div>
             </form>
 
             {/* <form onSubmit={handleOrder}>
               <input type="text" name="name"/>
               <input type="submit" value="Submit" />
             </form> */}
-         
-           
           </div>
         </div>
       </div>
