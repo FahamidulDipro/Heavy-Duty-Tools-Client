@@ -4,7 +4,7 @@ import {  signOut } from 'firebase/auth';
 
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
- 
+import { AiOutlineArrowLeft } from "react-icons/ai";
 const Navigation = () => {
   const [user,loading]  = useAuthState(auth);
   const navigate = useNavigate();
@@ -57,7 +57,7 @@ const Navigation = () => {
           {navItems}
           </ul>
         </div>
-        <div className="navbar-end lg:visible md:visible sm:invisible invisible">
+        <div className="navbar-end lg:visible md:visible sm:invisible invisible w-full ">
           {
             console.log(user)
           }
@@ -70,6 +70,9 @@ const Navigation = () => {
             <Link to="/signup" className="btn btn-sm" >Signup</Link></span>
           }
         
+        </div>
+        <div className="navbar-end ">
+        <label for="my-drawer-2" class="btn btn-xs btn-primary drawer-button lg:invisible "><AiOutlineArrowLeft className='text-2xl'></AiOutlineArrowLeft></label>
         </div>
       </div>
     );
