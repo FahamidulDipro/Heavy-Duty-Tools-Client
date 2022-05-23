@@ -24,8 +24,8 @@ const Navigation = () => {
   <li><Link to="/blog" className='font-bold'>Blog</Link></li>
   <li><Link to="/dashboard" className='font-bold'>Dashboard</Link></li>
    <div className='lg:hidden'>{
-     user?<span className='flex items-center'><div class="avatar online">
-     <div class="w-12 rounded-full">
+     user?<span className='flex items-center'><div className="avatar online">
+     <div className="w-12 rounded-full">
        <img src={user?.photoURL} alt="userImage" />
      </div>
    </div><span><b className='mx-5'> {user?.displayName}</b></span><button className='btn btn-sm mx-5' onClick={handleSignout}>Logout</button></span>:<span>  <Link to="/login" className="btn btn-sm mx-5" >Login</Link>
@@ -59,8 +59,8 @@ const Navigation = () => {
             console.log(user)
           }
           {
-            user?<span className='flex items-center'><div class="avatar online">
-            <div class="w-12 rounded-full">
+            user?<span className='flex items-center'><div className="avatar online">
+            <div className="w-12 rounded-full">
               <img src={user?.photoURL} alt="userImage" />
             </div>
           </div><span><b className='mx-5'> {user?.displayName}</b></span><button className='btn btn-sm mx-5' onClick={handleSignout}>Logout</button></span>:<span>  <Link to="/login" className="btn btn-sm mx-5" >Login</Link>

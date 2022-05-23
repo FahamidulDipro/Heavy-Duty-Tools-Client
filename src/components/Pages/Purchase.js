@@ -3,8 +3,11 @@ import { Link, useParams } from "react-router-dom";
 import useTools from "../../hooks/useTools";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineMinus } from "react-icons/ai";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 const Purchase = () => {
   const { toolId } = useParams();
+  const [user] = useAuthState(auth);
   //Using custom hook to load tools data
   const [tools] = useTools();
   //Finding the specific tool which matches the toolId
@@ -45,6 +48,17 @@ const Purchase = () => {
       setQdError(quantityError);
     }
   };
+  const handleOrder = event =>{
+    event.preventDefault();
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    const address = event.target.address.value;
+    const phone = event.target.phone.value;
+    const amount = event.target.amount.value;
+   
+    console.log(name,email,address,phone,amount);
+
+  }
 
   return (
     <div className="hero min-h-screen">
@@ -68,23 +82,26 @@ const Purchase = () => {
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <div className="card-body">
-            <div className="form-control">
+            <form className="form-control" onSubmit={handleOrder}>
               <label className="label">
                 <span className="label-text">Name</span>
               </label>
               <input
                 type="text"
-                placeholder="Name"
-                className="input input-bordered"
+                value={user?.displayName}
+                name = "name"
+                className="input input-bordered disabled:placeholder-black"
                 disabled
+                
               />
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
               <input
                 type="email"
-                placeholder="Email"
-                className="input input-bordered"
+                name="email"
+                value={user?.email}
+                className="input input-bordered disabled:placeholder-black"
                 disabled
               />
               <label className="label">
@@ -92,6 +109,7 @@ const Purchase = () => {
               </label>
               <input
                 type="text"
+                name="address"
                 placeholder="Address"
                 className="input input-bordered"
               />
@@ -100,6 +118,7 @@ const Purchase = () => {
               </label>
               <input
                 type="text"
+                name="phone"
                 placeholder="Phone Number"
                 className="input input-bordered"
               />
@@ -120,12 +139,13 @@ const Purchase = () => {
                   </span>
                   <input
                     type="text"
+                    name = "amount"
                     disabled
-                    placeholder={toolsQuantity}
+                    value={toolsQuantity}
                     className="input input-bordered focus:outline-none disabled:bg-white disabled:placeholder-black "
                   />
                   <span
-                    onClick={handleIncreaseQuantity}
+                  onClick={handleIncreaseQuantity}
                     className={`cursor-pointer ${
                       qError ? " bg-gray-300" : "bg-primary"
                     }`}
@@ -134,11 +154,17 @@ const Purchase = () => {
                   </span>
                 </label>
               </div>
+              <div className="form-control mt-6">
+              <button type="submit" className="btn btn-primary" >Place Order</button>
             </div>
-            <div className="form-control"></div>
-            <div className="form-control mt-6">
-              <button className="btn btn-primary">Place Order</button>
-            </div>
+            </form>
+
+            {/* <form onSubmit={handleOrder}>
+              <input type="text" name="name"/>
+              <input type="submit" value="Submit" />
+            </form> */}
+         
+           
           </div>
         </div>
       </div>
