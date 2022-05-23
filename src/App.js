@@ -1,6 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import AddProduct from "./components/Dashboard/AddProduct";
+import AllUsers from "./components/Dashboard/AllUsers";
 import Dashboard from "./components/Dashboard/Dashboard";
+import ManageAllOrders from "./components/Dashboard/ManageAllOrders";
+import ManageProducts from "./components/Dashboard/ManageProducts";
 import MyOrders from "./components/Dashboard/MyOrders";
 import MyProfile from "./components/Dashboard/MyProfile";
 import Review from "./components/Dashboard/Review";
@@ -44,6 +48,16 @@ function App() {
           <Route path="orders" element={<MyOrders></MyOrders>}></Route>
           <Route path="review" element={<Review></Review>}></Route>
           <Route path="profile" element={<MyProfile></MyProfile>}></Route>
+          <Route path="allUsers" element={<AllUsers></AllUsers>}></Route>
+          <Route path="addProduct" element={<AddProduct></AddProduct>}></Route>
+          <Route
+            path="manageAllOrders"
+            element={<ManageAllOrders></ManageAllOrders>}
+          ></Route>
+          <Route
+            path="manageProducts"
+            element={<ManageProducts></ManageProducts>}
+          ></Route>
         </Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
