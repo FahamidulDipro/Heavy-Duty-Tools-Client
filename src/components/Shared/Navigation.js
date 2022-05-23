@@ -58,9 +58,7 @@ const Navigation = () => {
           </ul>
         </div>
         <div className="navbar-end lg:visible md:visible sm:invisible invisible w-full ">
-          {
-            console.log(user)
-          }
+         
           {
             user?<span className='flex items-center'><div className="avatar online">
             <div className="w-12 rounded-full">
@@ -72,7 +70,7 @@ const Navigation = () => {
         
         </div>
         <div className="navbar-end ">
-        <label for="my-drawer-2" class="btn btn-xs btn-primary drawer-button lg:invisible "><AiOutlineArrowLeft className='text-2xl'></AiOutlineArrowLeft></label>
+        <label htmlFor="my-drawer-2" className="btn btn-xs btn-primary drawer-button lg:invisible "><AiOutlineArrowLeft className='text-2xl'></AiOutlineArrowLeft></label>
         </div>
       </div>
     );

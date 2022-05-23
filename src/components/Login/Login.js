@@ -5,8 +5,10 @@ import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import Loading from "../Utilities/Loading";
 import SocialLogin from "./SocialLogin";
+import useToken from "../../hooks/useToken";
 
 const Login = () => {
+ 
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const location = useLocation();
@@ -14,6 +16,7 @@ const Login = () => {
   //React Firebase Hook for Sign in with Email & Password
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
+    const [token] = useToken(user);
   const onSubmit = (data) => {
     const email = data.email;
     const password = data.password;
@@ -28,7 +31,8 @@ const Login = () => {
       <small className="text-red-500 text-left my-2">{error?.message}</small>
     );
   }
-  if (user) {
+  
+  if (token) {
     navigate(from, { replace: true });
   }
 

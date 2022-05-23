@@ -22,7 +22,7 @@ const SocialLogin = () => {
     }
     return (
         <div>
-             <div class="divider">OR</div>
+             <div className="divider">OR</div>
             <button className='btn bg-blue-500 text-white uppercase w-full border-0' onClick={handleGoogleSignIn}><BsGoogle className='mx-3 text-2xl'></BsGoogle> sign in with google</button>
         </div>
     );
