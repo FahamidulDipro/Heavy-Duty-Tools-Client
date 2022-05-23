@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import Loading from "../Utilities/Loading";
+import SocialLogin from "./SocialLogin";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
@@ -16,9 +17,7 @@ const Login = () => {
   const onSubmit = (data) => {
     const email = data.email;
     const password = data.password;
-    signInWithEmailAndPassword(email, password).then(() => {
-      navigate(from, { replace: true });
-    });
+    signInWithEmailAndPassword(email, password);
   };
   if (loading) {
     return <Loading></Loading>;
@@ -30,7 +29,7 @@ const Login = () => {
     );
   }
   if (user) {
-    navigate("/");
+    navigate(from, { replace: true });
   }
 
   return (
@@ -66,6 +65,7 @@ const Login = () => {
                 Signup Here
               </Link>{" "}
             </span>
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </form>

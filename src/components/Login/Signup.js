@@ -7,6 +7,7 @@ import {
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import Loading from "../Utilities/Loading";
+import SocialLogin from "./SocialLogin";
 
 const Signup = () => {
   const { register, handleSubmit } = useForm();
@@ -99,6 +100,7 @@ const Signup = () => {
                 Login Here
               </Link>{" "}
             </span>
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </form>
