@@ -61,6 +61,8 @@ const Purchase = () => {
 
     const orderData = {
       name: event.target.name.value,
+      tool:selectedTool.name,
+      price:selectedTool.price,
       email: event.target.email.value,
       address: event.target.address.value,
       phone: event.target.phone.value,

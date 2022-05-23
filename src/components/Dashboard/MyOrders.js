@@ -28,18 +28,30 @@ const MyOrders = () => {
             <thead>
               <tr>
                 <th></th>
-                <th>Name</th>
-                <th>Job</th>
-                <th>Favorite Color</th>
+                <th>Ordered Tools</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+                <th>Payment</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th>1</th>
-                <td>Cy Ganderton</td>
-                <td>Quality Control Specialist</td>
-                <td>Blue</td>
-              </tr>
+              {orders.map((order, index) => (
+                <tr key={order._id}>
+                  <th>{index + 1}</th>
+                  <td>{order?.tool}</td>
+                  <td>{order?.amount}</td>
+                  <td className="font-bold ">
+                    ${""}
+                    <span className="text-blue-500">
+                      {parseFloat(order?.price) * parseFloat(order?.amount)}
+                    </span>
+                  </td>
+                  <td>
+                    <button className="btn btn-primary btn-sm">PAY</button>
+                  </td>
+                </tr>
+              ))}
+
               {/* <!-- row 2 --> */}
             </tbody>
           </table>
