@@ -8,6 +8,7 @@ import {
 } from "react-firebase-hooks/auth";
 import Loading from "../Utilities/Loading";
 import SocialLogin from "./SocialLogin";
+import useToken from "../../hooks/useToken";
 
 const Signup = () => {
   const { register, handleSubmit } = useForm();
@@ -16,6 +17,10 @@ const Signup = () => {
     useCreateUserWithEmailAndPassword(auth);
   //Updating Profile For Username and Image
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+  //Using Custom hook for token
+  const [token] = useToken(user);
+
   const [passMatchError, setPassMatchPError] = useState("");
   const navigate = useNavigate();
   const onSubmit = async (data) => {
@@ -41,7 +46,7 @@ const Signup = () => {
       <small className="text-red-500 text-left my-2">{error?.message}</small>
     );
   }
-  if (user) {
+  if (token) {
     navigate("/");
     console.log(user);
   }

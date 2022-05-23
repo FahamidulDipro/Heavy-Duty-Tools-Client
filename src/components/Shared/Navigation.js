@@ -10,6 +10,7 @@ const Navigation = () => {
   const navigate = useNavigate();
   const handleSignout = ()=>{
     signOut(auth);
+    localStorage.removeItem('accessToken');
     navigate('/login');
   }
   const navItems = <>   <li><Link to="/" className='font-bold'>Home</Link></li>
@@ -21,7 +22,10 @@ const Navigation = () => {
   
   </li>
   <li><Link to="/blog" className='font-bold'>Blog</Link></li>
-  <li><Link to="/dashboard" className='font-bold'>Dashboard</Link></li>
+  {
+    user?<li><Link to="/dashboard" className='font-bold'>Dashboard</Link></li>:null
+  }
+  
    <div className='lg:hidden'>{
      user?<span className='flex items-center'><div className="avatar online">
      <div className="w-12 rounded-full">
