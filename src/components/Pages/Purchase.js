@@ -20,6 +20,14 @@ const Purchase = () => {
   //Error Message for unavailable and minimum quantity
   const [qError, setQError] = useState("");
   const [qdError, setQdError] = useState("");
+  const [limitError, setLimitError] = useState("");
+  //Change in available quantity on UI
+  const [availableToolsQuantity, setAvailableToolsQuantity] = useState(
+    selectedTool?.availableQuantity
+  );
+  useEffect(() => {
+    setAvailableToolsQuantity(selectedTool?.availableQuantity);
+  }, [selectedTool?.availableQuantity]);
 
   let quantityError;
   const handleIncreaseQuantity = () => {
@@ -57,7 +65,9 @@ const Purchase = () => {
       address: event.target.address.value,
       phone: event.target.phone.value,
       amount: event.target.amount.value,
+      availableQuantity: selectedTool?.availableQuantity,
     };
+    //For adding Orders to database
     fetch("http://localhost:5000/orders", {
       method: "POST",
       headers: {
@@ -66,7 +76,40 @@ const Purchase = () => {
       body: JSON.stringify(orderData),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        console.log(data);
+      });
+
+    //For updating the Available Quantity
+    let availableToolQuantity;
+    if (selectedTool?.availableQuantity - orderData.amount >= 0) {
+      availableToolQuantity =
+        selectedTool?.availableQuantity - orderData.amount;
+      const selectedToolData = {
+        selectedToolId: toolId,
+        availableQuantity: availableToolQuantity,
+      };
+
+      fetch("http://localhost:5000/tools", {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(selectedToolData),
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          setAvailableToolsQuantity(
+            selectedTool?.availableQuantity - orderData.amount
+          );
+
+          console.log(result);
+        });
+    } else {
+      setLimitError(
+        <small className="text-red-500 text-left">Stock Finished!</small>
+      );
+    }
   };
 
   return (
@@ -83,7 +126,7 @@ const Purchase = () => {
             {selectedTool?.minimumOrderQuantity}
           </p>
           <p>
-            <b>Available Quantity: </b> {selectedTool?.availableQuantity}
+            <b>Available Quantity: </b> {availableToolsQuantity}
           </p>
           <p>
             <b>Price: </b> ${selectedTool?.price}
@@ -135,7 +178,7 @@ const Purchase = () => {
                 <label className="label">
                   <span className="label-text">Enter amount</span>
                 </label>
-                {qError || qdError}
+                {qError || qdError || limitError}
                 <label className="input-group">
                   <span
                     onClick={handleDecreaseQuantity}
