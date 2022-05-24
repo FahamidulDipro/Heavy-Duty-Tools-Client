@@ -31,16 +31,21 @@ const AllUsers = () => {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
       },
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 403) {
+          toast.error("Failed to make an admin!");
+        }
+        return res.json();
+      })
       .then((data) => {
-        toast.success(`You made ${name}! an Admin!`);
-        refetch();
-        console.log(data);
+        if (data.modifiedCount > 0) {
+          toast.success(`You made ${name}! an Admin!`);
+          refetch();
+        }
       });
   };
   return (
     <div className="mt-20">
-      <ToastContainer />
       <section className="flex justify-start mt-20 p-10">
         {" "}
         <div className="overflow-x-auto ">
@@ -55,6 +60,7 @@ const AllUsers = () => {
                 <th>Action</th>
               </tr>
             </thead>
+            <ToastContainer className="mt-20" />
             <tbody>
               {users?.map((user, index) => (
                 <tr key={user._id}>

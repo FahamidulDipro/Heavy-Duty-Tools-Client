@@ -35,9 +35,7 @@ const MyOrders = () => {
       <h1 className="text-orange-500 font-bold text-3xl my-10 text-left">
         My Orders
       </h1>
-      {
-        console.log(user)
-      }
+    
       <section className="flex justify-start">
         {" "}
         <div className="overflow-x-auto ">
