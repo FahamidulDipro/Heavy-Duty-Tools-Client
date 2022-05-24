@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import useTools from "../../hooks/useTools";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineMinus } from "react-icons/ai";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
+import { useQuery } from "react-query";
+
 const Purchase = () => {
+  //Using Refetch to see the change in quantity instantly
+  const {
+    refetch,
+  } = useQuery("toolsData", () =>
+    fetch("http://localhost:5000/tools").then((res) => res.json())
+  );
+
   const { toolId } = useParams();
   const [user] = useAuthState(auth);
   //Using custom hook to load tools data
@@ -70,6 +79,7 @@ const Purchase = () => {
       availableQuantity: selectedTool?.availableQuantity,
     };
     //For adding Orders to database
+    
     fetch("http://localhost:5000/orders", {
       method: "POST",
       headers: {
@@ -79,8 +89,12 @@ const Purchase = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        refetch();
         console.log(data);
       });
+
+    
+
 
     //For updating the Available Quantity
     let availableToolQuantity;
@@ -128,6 +142,9 @@ const Purchase = () => {
             {selectedTool?.minimumOrderQuantity}
           </p>
           <p>
+            {
+              // console.log(refetch)
+            }
             <b>Available Quantity: </b> {availableToolsQuantity}
           </p>
           <p>
