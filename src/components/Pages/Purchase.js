@@ -6,6 +6,8 @@ import { AiOutlineMinus } from "react-icons/ai";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { useQuery } from "react-query";
+ 
+import { toast, ToastContainer } from "react-toastify";
 
 const Purchase = () => {
   //Using Refetch to see the change in quantity instantly
@@ -90,6 +92,9 @@ const Purchase = () => {
       .then((res) => res.json())
       .then((data) => {
         refetch();
+     
+          toast.success('Added to your orders')
+      
         console.log(data);
       });
 
@@ -118,7 +123,7 @@ const Purchase = () => {
           setAvailableToolsQuantity(
             selectedTool?.availableQuantity - orderData.amount
           );
-
+          // toast.success('Added to your cart')
           console.log(result);
         });
     } else {
@@ -130,6 +135,7 @@ const Purchase = () => {
 
   return (
     <div className="hero min-h-screen">
+     <ToastContainer className="mt-20" />
       <div className="hero-content flex-col lg:flex-row ">
         <div className="text-center lg:text-left  min-w-full p-5">
           <h1 className="text-5xl font-bold ">{selectedTool?.name}</h1>
