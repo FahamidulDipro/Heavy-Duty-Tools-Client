@@ -19,6 +19,7 @@ import Navigation from "./components/Shared/Navigation";
 import RequireAuth from "./components/Utilities/RequireAuth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import RequireAdmin from "./components/Utilities/RequireAdmin";
 function App() {
   return (
     <div className="App">
@@ -49,15 +50,37 @@ function App() {
           <Route path="orders" element={<MyOrders></MyOrders>}></Route>
           <Route path="review" element={<Review></Review>}></Route>
           <Route path="profile" element={<MyProfile></MyProfile>}></Route>
-          <Route path="allUsers" element={<AllUsers></AllUsers>}></Route>
-          <Route path="addProduct" element={<AddProduct></AddProduct>}></Route>
+          <Route
+            path="allUsers"
+            element={
+              <RequireAdmin>
+                <AllUsers></AllUsers>
+              </RequireAdmin>
+            }
+          ></Route>
+          <Route
+            path="addProduct"
+            element={
+              <RequireAdmin>
+                <AddProduct></AddProduct>
+              </RequireAdmin>
+            }
+          ></Route>
           <Route
             path="manageAllOrders"
-            element={<ManageAllOrders></ManageAllOrders>}
+            element={
+              <RequireAdmin>
+                <ManageAllOrders></ManageAllOrders>
+              </RequireAdmin>
+            }
           ></Route>
           <Route
             path="manageProducts"
-            element={<ManageProducts></ManageProducts>}
+            element={
+              <RequireAdmin>
+                <ManageProducts></ManageProducts>
+              </RequireAdmin>
+            }
           ></Route>
         </Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
