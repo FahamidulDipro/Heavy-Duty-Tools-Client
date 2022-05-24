@@ -20,7 +20,7 @@ const MyOrders = () => {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
       },
     }).then((res) => {
-      console.log(res);
+   
       if (res.status === 401 || res.status === 403) {
         signOut(auth);
         localStorage.removeItem("accessToken");
@@ -35,6 +35,9 @@ const MyOrders = () => {
       <h1 className="text-orange-500 font-bold text-3xl my-10 text-left">
         My Orders
       </h1>
+      {
+        console.log(user)
+      }
       <section className="flex justify-start">
         {" "}
         <div className="overflow-x-auto ">
@@ -46,6 +49,7 @@ const MyOrders = () => {
                 <th>Quantity</th>
                 <th>Total Price</th>
                 <th>Payment</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -62,6 +66,9 @@ const MyOrders = () => {
                   </td>
                   <td>
                     <button className="btn btn-primary btn-sm">PAY</button>
+                  </td>
+                  <td>
+                    <button className="btn bg-red-500 btn-sm text-white border-0">CANCEL</button>
                   </td>
                 </tr>
               ))}

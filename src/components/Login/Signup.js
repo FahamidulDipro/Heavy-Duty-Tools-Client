@@ -15,11 +15,12 @@ const Signup = () => {
   //React Firebase hook
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+      //Using Custom hook for token
+  const [token] = useToken(user);
   //Updating Profile For Username and Image
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
-  //Using Custom hook for token
-  const [token] = useToken(user);
+
 
   const [passMatchError, setPassMatchPError] = useState("");
   const navigate = useNavigate();
