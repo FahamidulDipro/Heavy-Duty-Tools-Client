@@ -17,7 +17,8 @@ import NotFound from "./components/Pages/NotFound";
 import Purchase from "./components/Pages/Purchase";
 import Navigation from "./components/Shared/Navigation";
 import RequireAuth from "./components/Utilities/RequireAuth";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <div className="App">

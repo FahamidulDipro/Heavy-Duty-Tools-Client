@@ -6,7 +6,7 @@ const useToken = (user) => {
     const email = user?.user?.email;
     const name = user?.user?.displayName;
     const photo = user?.user?.photoURL;
-    const currentUser = {email:email, name,photo:photo};
+    const currentUser = {email:email, name:name ,photo:photo};
     if (email) {
       fetch(`http://localhost:5000/user/${email}`, {
         method: "PUT",
