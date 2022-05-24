@@ -20,6 +20,7 @@ import RequireAuth from "./components/Utilities/RequireAuth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequireAdmin from "./components/Utilities/RequireAdmin";
+import Payment from "./components/Dashboard/Payment";
 function App() {
   return (
     <div className="App">
@@ -30,6 +31,10 @@ function App() {
         <Route path="/blog" element={<Blog></Blog>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/signup" element={<Signup></Signup>}></Route>
+        <Route
+          path="/dashboard/payment/:orderId"
+          element={<Payment></Payment>}
+        ></Route>
         <Route
           path="/purchase/:toolId"
           element={

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import { signOut } from "firebase/auth";
 
 const MyOrders = () => {
   const navigate = useNavigate();
+
   const [user] = useAuthState(auth);
   //Using React Query to fetch data
   const {
@@ -63,10 +64,10 @@ const MyOrders = () => {
                     </span>
                   </td>
                   <td>
-                    <button className="btn btn-primary btn-sm">PAY</button>
+                  <Link to={`/dashboard/payment/${order?._id}`}><button className="btn btn-primary btn-sm  border-0">PAY</button></Link>
                   </td>
                   <td>
-                    <button className="btn bg-red-500 btn-sm text-white border-0">CANCEL</button>
+                  <button className="btn bg-red-500 btn-sm text-white border-0">CANCEL</button>
                   </td>
                 </tr>
               ))}
