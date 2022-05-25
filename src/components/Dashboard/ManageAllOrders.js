@@ -42,9 +42,11 @@ const ManageAllOrders = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        toast.success("Order Removed Successfully!");
-        refetch();
-        console.log(data);
+        if (data.deletedCount > 0) {
+          toast.success("Order Removed Successfully!");
+          refetch();
+          console.log(data);
+        }
       });
   };
   return (

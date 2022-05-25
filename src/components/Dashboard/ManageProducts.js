@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { AiOutlinePlus, AiFillDelete } from "react-icons/ai";
+import { toast, ToastContainer } from "react-toastify";
 
 const ManageProducts = () => {
   const {
@@ -10,6 +11,25 @@ const ManageProducts = () => {
   } = useQuery("allTools", () =>
     fetch("http://localhost:5000/tools").then((res) => res.json())
   );
+  const handleDeleteTools = (id) => {
+    const foundToolForDelete = tools.find((tool) => tool._id === id);
+    fetch(`http://localhost:5000/tool/${foundToolForDelete._id}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify(foundToolForDelete),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          toast.success("Tool Removed Successfully!");
+          refetch();
+          console.log(data);
+        }
+      });
+  };
   return (
     <div className="mt-10 p-10">
       <h1 className="text-3xl my-10 text-left text-blue-500 flex justify-between">
@@ -18,6 +38,7 @@ const ManageProducts = () => {
           <AiOutlinePlus className="mx-2 text-xl"></AiOutlinePlus>ADD TOOLS
         </button>
       </h1>
+      <ToastContainer className="mt-20"></ToastContainer>
       <div class="overflow-x-auto">
         <table class="table w-full">
           <thead>
@@ -51,7 +72,10 @@ const ManageProducts = () => {
                 <td>{tool?.minimumOrderQuantity}</td>
                 <td>${tool?.price}</td>
                 <td>
-                  <AiFillDelete className="text-2xl text-red-500"></AiFillDelete>
+                  <AiFillDelete
+                    className="text-2xl text-red-500"
+                    onClick={() => handleDeleteTools(tool?._id)}
+                  ></AiFillDelete>
                 </td>
                 <td>
                   <button className="btn btn-sm bg-blue-500 text-white border-0">
