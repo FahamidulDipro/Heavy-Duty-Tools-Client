@@ -9,9 +9,9 @@ const Dashboard = () => {
   const [admin] = useAdmin(user);
   return (
     <div className="relative ">
-      <h1 className="text-3xl w-full  float-left mt-10 ">
+      {/* <h1 className="text-3xl w-full  float-left mt-10 ">
         Welcome to Dashboard
-      </h1>
+      </h1> */}
       {console.log(admin)}
       <div className="drawer drawer-mobile mt-0 absolute">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />

@@ -45,8 +45,11 @@ const AllUsers = () => {
       });
   };
   return (
-    <div className="mt-20">
-      <section className="flex justify-start mt-20 p-10">
+    <div className="mt-10 p-10">
+       <h1 className="mt-10 text-3xl text-left text-blue-500">
+       All Users
+      </h1>
+      <section className="flex justify-start mt-10">
         {" "}
         <div className="overflow-x-auto ">
           <table className="table w-full">

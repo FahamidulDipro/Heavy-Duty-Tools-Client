@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { AiOutlineCheck } from "react-icons/ai";
+import Loading from "../Utilities/Loading";
+import { toast, ToastContainer } from "react-toastify";
 const ManageAllOrders = () => {
   const {
     data: orders,
@@ -28,11 +30,30 @@ const ManageAllOrders = () => {
         refetch();
       });
   };
+  const cancelOrderHandler = (id) => {
+    const foundOrderForCancel = orders.find((order) => order._id === id);
+    fetch(`http://localhost:5000/order/${foundOrderForCancel._id}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify(foundOrderForCancel),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        toast.success("Order Removed Successfully!");
+        refetch();
+        console.log(data);
+      });
+  };
   return (
-    <div>
-      <h1>Manage All Orders</h1>
-
-      <section className="flex justify-start">
+    <div className="p-10">
+      <h1 className="mt-10 text-3xl text-left text-blue-500">
+        Manage All Orders
+      </h1>
+      <ToastContainer className="mt-20"></ToastContainer>
+      <section className="flex justify-start mt-20">
         {" "}
         <div className="overflow-x-auto ">
           <table className="table w-full">
@@ -91,7 +112,10 @@ const ManageAllOrders = () => {
                         </button>
                       )
                     ) : (
-                      <button className="btn bg-red-500 btn-sm text-white border-0">
+                      <button
+                        className="btn bg-red-500 btn-sm text-white border-0"
+                        onClick={() => cancelOrderHandler(order?._id)}
+                      >
                         CANCEL
                       </button>
                     )}
