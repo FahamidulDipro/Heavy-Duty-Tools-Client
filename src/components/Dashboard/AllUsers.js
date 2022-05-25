@@ -19,9 +19,7 @@ const AllUsers = () => {
       },
     }).then((res) => res.json())
   );
-  const handleDeleteUser = () => {
-    console.log("Deleted!");
-  };
+
 
   //Making a user Admin
   const makeAdmin = (email, name) => {
@@ -44,6 +42,28 @@ const AllUsers = () => {
         }
       });
   };
+  //Deleting Users
+  const handleDeleteUser = (id) => {
+    const foundUserForDelete = users.find((user) => user._id === id);
+    fetch(`http://localhost:5000/user/${foundUserForDelete._id}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify(foundUserForDelete),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          toast.success("User Removed Successfully!");
+          refetch();
+          console.log(data);
+        }
+      });
+    console.log(foundUserForDelete);
+  };
+
   return (
     <div className="mt-10 p-10">
        <h1 className="mt-10 text-3xl text-left text-blue-500">
@@ -94,10 +114,13 @@ const AllUsers = () => {
                     )}
                   </td>
                   <td>
-                    <AiFillDelete
+                    {
+                      user?.role==="admin"?null:  <AiFillDelete
                       className="text-2xl text-red-500 ml-2 cursor-pointer"
-                      onClick={handleDeleteUser}
+                      onClick={()=>handleDeleteUser(user?._id)}
                     ></AiFillDelete>
+                    }
+                  
                   </td>
                 </tr>
               ))}
