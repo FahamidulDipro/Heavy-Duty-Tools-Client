@@ -73,12 +73,12 @@ const Purchase = () => {
     const orderData = {
       name: event.target.name.value,
       tool:selectedTool.name,
-      price:selectedTool.price,
+      price: parseFloat(selectedTool.price) ,
       email: event.target.email.value,
       address: event.target.address.value,
       phone: event.target.phone.value,
-      amount: event.target.amount.value,
-      availableQuantity: selectedTool?.availableQuantity,
+      amount: parseFloat(event.target.amount.value) ,
+      availableQuantity: parseFloat( selectedTool?.availableQuantity),
     };
     //For adding Orders to database
     
@@ -123,7 +123,7 @@ const Purchase = () => {
         .then((res) => res.json())
         .then((result) => {
           setAvailableToolsQuantity(
-            selectedTool?.availableQuantity - orderData.amount
+            parseFloat(selectedTool?.availableQuantity) - parseFloat(orderData.amount) 
           );
           // toast.success('Added to your cart')
           console.log(result);

@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import { signOut } from "firebase/auth";
 import { AiOutlineCheck } from "react-icons/ai";
+import { toast, ToastContainer } from "react-toastify";
 
 const MyOrders = () => {
   const navigate = useNavigate();
@@ -30,13 +31,32 @@ const MyOrders = () => {
       return res.json();
     })
   );
-
+  const handleDeleteMyOrder = (id) => {
+    const foundOrderForCancel = orders.find((order) => order._id === id);
+    fetch(`http://localhost:5000/my_order/${foundOrderForCancel._id}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify(foundOrderForCancel),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          toast.success("Your Order Is Cancelled!");
+          refetch();
+          console.log(data);
+        }
+      });
+    console.log(foundOrderForCancel);
+  };
   return (
     <div className="p-20">
       <h1 className="text-orange-500 font-bold text-3xl my-10 text-left">
         My Orders
       </h1>
-
+      <ToastContainer className="mt-20" />
       <section className="flex justify-start">
         {" "}
         <div className="overflow-x-auto ">
@@ -93,6 +113,7 @@ const MyOrders = () => {
                       <p className="text-red-500">Payment Pending</p>
                     )}
                   </td>
+                  
                   <td>
                     {order?.paid ? (
                       order?.shipped ? (
@@ -109,7 +130,7 @@ const MyOrders = () => {
                   </td>
                   <td>
                     {order?.paid ? null : (
-                      <button className="btn bg-red-500 btn-sm text-white border-0">
+                      <button className="btn bg-red-500 btn-sm text-white border-0" onClick={()=>handleDeleteMyOrder(order?._id)}>
                         CANCEL
                       </button>
                     )}

@@ -1,10 +1,21 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+
 const AddTool = () => {
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
+    fetch("http://localhost:5000/tools", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((result) => console.log(result));
   };
+
   return (
     <form className="form-control" onSubmit={handleSubmit(onSubmit)}>
       <label className="label">
@@ -13,7 +24,15 @@ const AddTool = () => {
       <input
         type="text"
         className="input input-bordered disabled:placeholder-black"
-        {...register("toolName")}
+        {...register("name")}
+      />
+      <label className="label">
+        <span className="label-text">Tool Image</span>
+      </label>
+      <input
+        type="text"
+        className="input input-bordered disabled:placeholder-black"
+        {...register("image")}
       />
       <label className="label">
         <span className="label-text">Description</span>
@@ -27,7 +46,7 @@ const AddTool = () => {
         <span className="label-text">Available Quantity</span>
       </label>
       <input
-        type="text"
+        type="number"
         {...register("availableQuantity")}
         className="input input-bordered"
       />
@@ -35,15 +54,23 @@ const AddTool = () => {
         <span className="label-text">Minimum Order Quantity</span>
       </label>
       <input
-        type="text"
+        type="number"
         {...register("minimumOrderQuantity")}
         className="input input-bordered"
       />
-      <div class="modal-action">
-        <label for="update-modal" class="btn">
-          <input type="submit" for="update-modal" />
-        </label>
-      </div>
+      <label className="label">
+        <span className="label-text">Price</span>
+      </label>
+      <input
+        type="number"
+        {...register("price")}
+        className="input input-bordered"
+      />
+      <input
+        type="submit"
+        className="btn bg-purple-500 text-white border-0 mt-5 text-xl"
+        value="ADD TOOL"
+      />
     </form>
   );
 };
