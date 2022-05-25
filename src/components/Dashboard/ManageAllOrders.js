@@ -44,7 +44,7 @@ const ManageAllOrders = () => {
                 <th>Buyer Name</th>
                 <th>Buyer Email</th>
                 <th>Total Price</th>
-                <th>Status</th>
+                <th>Order Status</th>
                 <th>Action</th>
               </tr>
             </thead>

@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import { signOut } from "firebase/auth";
+import { AiOutlineCheck } from "react-icons/ai";
 
 const MyOrders = () => {
   const navigate = useNavigate();
@@ -21,7 +22,6 @@ const MyOrders = () => {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
       },
     }).then((res) => {
-   
       if (res.status === 401 || res.status === 403) {
         signOut(auth);
         localStorage.removeItem("accessToken");
@@ -36,7 +36,7 @@ const MyOrders = () => {
       <h1 className="text-orange-500 font-bold text-3xl my-10 text-left">
         My Orders
       </h1>
-    
+
       <section className="flex justify-start">
         {" "}
         <div className="overflow-x-auto ">
@@ -48,6 +48,8 @@ const MyOrders = () => {
                 <th>Quantity</th>
                 <th>Total Price</th>
                 <th>Payment</th>
+                <th>Payment Status</th>
+                <th>Shipping Status</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -64,16 +66,53 @@ const MyOrders = () => {
                     </span>
                   </td>
                   <td>
-                    {
-                      order?.paid?<p className="text-green-500 font-bold">PAID</p>:<Link to={`/dashboard/payment/${order?._id}`}><button className="btn btn-primary btn-sm  border-0">PAY</button></Link>
-                    }
-                  
+                    {order?.paid ? (
+                      <p className="text-green-500 font-bold flex items-center">
+                        <AiOutlineCheck className="mx-1 text-xl"></AiOutlineCheck>
+                        PAID
+                      </p>
+                    ) : (
+                      <Link to={`/dashboard/payment/${order?._id}`}>
+                        <button className="btn btn-primary btn-sm  border-0">
+                          PAY
+                        </button>
+                      </Link>
+                    )}
+                  </td>
+
+                  <td>
+                    {order?.paid ? (
+                      <p>
+                        <b className="">Transaction ID:</b>
+                        <br />
+                        <span className="text-orange-600">
+                          {order.transactionId}
+                        </span>
+                      </p>
+                    ) : (
+                      <p className="text-red-500">Payment Pending</p>
+                    )}
                   </td>
                   <td>
-                    {
-                      order?.paid?<p><b className="">Transaction ID:</b><br /><span className="text-orange-600">{order.transactionId}</span></p>:           <button className="btn bg-red-500 btn-sm text-white border-0">CANCEL</button>
-                    }
-       
+                    {order?.paid ? (
+                      order?.shipped ? (
+                        <p className="font-bold text-purple-500 flex items-center">
+                          <AiOutlineCheck className="mx-1 text-xl"></AiOutlineCheck>
+                          Shipped{" "}
+                        </p>
+                      ) : (
+                        <p className=" text-blue-500 font-bold">
+                          Pending For Approval
+                        </p>
+                      )
+                    ) : null}
+                  </td>
+                  <td>
+                    {order?.paid ? null : (
+                      <button className="btn bg-red-500 btn-sm text-white border-0">
+                        CANCEL
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))}
