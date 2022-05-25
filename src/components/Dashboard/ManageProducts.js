@@ -72,10 +72,35 @@ const ManageProducts = () => {
                 <td>{tool?.minimumOrderQuantity}</td>
                 <td>${tool?.price}</td>
                 <td>
-                  <AiFillDelete
-                    className="text-2xl text-red-500"
-                    onClick={() => handleDeleteTools(tool?._id)}
-                  ></AiFillDelete>
+                  <label
+                    for="my-modal"
+                    class="btn modal-button bg-white border-0"
+                  >
+                    <AiFillDelete
+                      className="text-3xl text-red-500 "
+                      for="my-modal"
+                    ></AiFillDelete>
+                  </label>
+
+                  {/* Modal */}
+                  <input type="checkbox" id="my-modal" class="modal-toggle" />
+                  <div class="modal">
+                    <div class="modal-box">
+                      <h3 class="font-bold text-lg">
+                        Are you sure you want to delete {tool?.name}?
+                      </h3>
+
+                      <div class="modal-action">
+                        <label
+                          for="my-modal"
+                          class="btn bg-red-500 text-white border-0"
+                          onClick={() => handleDeleteTools(tool?._id)}
+                        >
+                          Confirm Delete
+                        </label>
+                      </div>
+                    </div>
+                  </div>
                 </td>
                 <td>
                   <button className="btn btn-sm bg-blue-500 text-white border-0">
