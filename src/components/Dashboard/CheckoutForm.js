@@ -11,6 +11,9 @@ const CheckoutForm = ({ total, order }) => {
   const [cardError, setCardError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [success, setSuccess] = useState("");
+  const [processing, setProcessing] = useState(false);
+  const [transactionId, setTransactionId] = useState("");
+
   useEffect(() => {
     fetch("http://localhost:5000/create_payment_intent", {
       method: "POST",
@@ -43,10 +46,9 @@ const CheckoutForm = ({ total, order }) => {
     if (error) {
       setCardError(error?.message || "");
       setSuccess("");
-      console.log(error);
     } else {
-      setSuccess("Congrats! your payment is done!");
       setCardError("");
+      setSuccess("Congrats! your payment is done!");
     }
 
     //Confirming card payment
@@ -60,10 +62,13 @@ const CheckoutForm = ({ total, order }) => {
         },
       });
     if (intentError) {
+      setProcessing(false);
       setCardError(intentError.message);
       setSuccess("");
-      console.log(paymentIntent);
     } else {
+      setCardError("");
+      setTransactionId(paymentIntent.id);
+      console.log(paymentIntent);
     }
   };
 
@@ -86,7 +91,15 @@ const CheckoutForm = ({ total, order }) => {
         }}
       />
       {cardError && <p className="mt-2 text-red-500 text-left">{cardError}</p>}
-      {success && <p className="mt-2 text-green-500 text-left">{success}</p>}
+      {success && (
+        <div>
+          <p className="mt-2 text-green-500 text-left">{success}</p>
+          <p className="mt-2  text-left">
+            <b className="text-purple-500">Transaction Id: </b>
+            {transactionId}
+          </p>
+        </div>
+      )}
 
       <div className="flex justify-start">
         <button
