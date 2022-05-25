@@ -1,5 +1,6 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import React, { useEffect, useState } from "react";
+import Loading from "../Utilities/Loading";
 
 const CheckoutForm = ({ total, order }) => {
   const totalPayment = {
@@ -51,7 +52,9 @@ const CheckoutForm = ({ total, order }) => {
       setCardError("");
       setSuccess("Congrats! your payment is done!");
     }
-
+    if (processing) {
+      return <Loading></Loading>;
+    }
     //Confirming card payment
     const { paymentIntent, error: intentError } =
       await stripe.confirmCardPayment(clientSecret, {
@@ -124,7 +127,7 @@ const CheckoutForm = ({ total, order }) => {
       <div className="flex justify-start">
         <button
           type="submit"
-          disabled={!stripe || !clientSecret}
+          disabled={!stripe || !clientSecret || success}
           className="btn bg-blue-500 text-white mt-5 border-0 btn-sm"
         >
           Pay
