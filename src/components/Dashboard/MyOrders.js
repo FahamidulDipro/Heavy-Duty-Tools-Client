@@ -64,10 +64,16 @@ const MyOrders = () => {
                     </span>
                   </td>
                   <td>
-                  <Link to={`/dashboard/payment/${order?._id}`}><button className="btn btn-primary btn-sm  border-0">PAY</button></Link>
+                    {
+                      order?.paid?<p className="text-green-500 font-bold">PAID</p>:<Link to={`/dashboard/payment/${order?._id}`}><button className="btn btn-primary btn-sm  border-0">PAY</button></Link>
+                    }
+                  
                   </td>
                   <td>
-                  <button className="btn bg-red-500 btn-sm text-white border-0">CANCEL</button>
+                    {
+                      order?.paid?<p><b className="">Transaction ID:</b><br /><span className="text-orange-600">{order.transactionId}</span></p>:           <button className="btn bg-red-500 btn-sm text-white border-0">CANCEL</button>
+                    }
+       
                   </td>
                 </tr>
               ))}

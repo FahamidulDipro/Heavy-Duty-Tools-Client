@@ -5,7 +5,7 @@ const CheckoutForm = ({ total, order }) => {
   const totalPayment = {
     totalAmountPay: total,
   };
-  const { name } = order;
+  const { name, _id } = order;
   const stripe = useStripe();
   const elements = useElements();
   const [cardError, setCardError] = useState("");
@@ -45,6 +45,7 @@ const CheckoutForm = ({ total, order }) => {
     });
     if (error) {
       setCardError(error?.message || "");
+      setProcessing(true);
       setSuccess("");
     } else {
       setCardError("");
@@ -67,8 +68,27 @@ const CheckoutForm = ({ total, order }) => {
       setSuccess("");
     } else {
       setCardError("");
+      setProcessing(false);
       setTransactionId(paymentIntent.id);
       console.log(paymentIntent);
+      //Updating Payment info in Orders
+
+      const payment = {
+        toolForPayment: _id,
+        transactionId: paymentIntent.id,
+      };
+      fetch(`http://localhost:5000/order/${_id}`, {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify(payment),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
     }
   };
 
