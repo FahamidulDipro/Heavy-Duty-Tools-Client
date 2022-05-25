@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { AiOutlinePlus, AiFillDelete } from "react-icons/ai";
 import { toast, ToastContainer } from "react-toastify";
-
+import { useForm } from "react-hook-form";
+import AddTool from "./AddTool";
 const ManageProducts = () => {
   const {
     data: tools,
@@ -30,13 +31,36 @@ const ManageProducts = () => {
         }
       });
   };
+
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+  const [toolName, setToolName] = useState("");
   return (
     <div className="mt-10 p-10">
       <h1 className="text-3xl my-10 text-left text-blue-500 flex justify-between">
         Manage Products{" "}
-        <button className="btn btn-lg bg-purple-500 text-white border-0 flex justify-center">
+        <label
+          for="add-modal"
+          class="btn modal-button bg-purple-500 text-white border-0"
+        >
           <AiOutlinePlus className="mx-2 text-xl"></AiOutlinePlus>ADD TOOLS
-        </button>
+        </label>
+        <input type="checkbox" id="add-modal" class="modal-toggle" />
+        <div class="modal">
+          <div class="modal-box">
+            <h3 class="font-bold text-lg">Add New Tool</h3>
+            <p class="py-4">
+              <AddTool></AddTool>
+            </p>
+            <div class="modal-action">
+              <label for="add-modal" class="btn">
+                Exit
+              </label>
+            </div>
+          </div>
+        </div>
       </h1>
       <ToastContainer className="mt-20"></ToastContainer>
       <div class="overflow-x-auto">
@@ -93,6 +117,12 @@ const ManageProducts = () => {
                       <div class="modal-action">
                         <label
                           for="my-modal"
+                          class="btn bg-blue-500 text-white border-0"
+                        >
+                          No
+                        </label>
+                        <label
+                          for="my-modal"
                           class="btn bg-red-500 text-white border-0"
                           onClick={() => handleDeleteTools(tool?._id)}
                         >
@@ -103,9 +133,74 @@ const ManageProducts = () => {
                   </div>
                 </td>
                 <td>
-                  <button className="btn btn-sm bg-blue-500 text-white border-0">
+                  <label
+                    for="update-modal"
+                    class="btn btn-xs modal-button bg-blue-500 text-white border-0"
+                  >
                     UPDATE
-                  </button>
+                  </label>
+
+                  <input
+                    type="checkbox"
+                    id="update-modal"
+                    class="modal-toggle"
+                  />
+                  <div class="modal">
+                    <div class="modal-box">
+                      <h3 class="font-bold text-lg mb-10">
+                        Update Tool Information
+                      </h3>
+                      {/* Form */}
+                      <form
+                        className="form-control"
+                        onSubmit={handleSubmit(onSubmit)}
+                      >
+                        <label className="label">
+                          <span className="label-text">Tool Name</span>
+                        </label>
+                        <input
+                          type="text"
+                          value={tool?.name}
+                          className="input input-bordered disabled:placeholder-black"
+                          {...register("toolName")}
+                        />
+                        <label className="label">
+                          <span className="label-text">Description</span>
+                        </label>
+                        <input
+                          type="text"
+                          value={tool?.shortDescription}
+                          className="input input-bordered disabled:placeholder-black"
+                          {...register("shortDescription")}
+                        />
+                        <label className="label">
+                          <span className="label-text">Available Quantity</span>
+                        </label>
+                        <input
+                          type="text"
+                          {...register("availableQuantity")}
+                          value={tool?.availableQuantity}
+                          className="input input-bordered"
+                        />
+                        <label className="label">
+                          <span className="label-text">
+                            Minimum Order Quantity
+                          </span>
+                        </label>
+                        <input
+                          type="text"
+                          {...register("minimumOrderQuantity")}
+                          value={tool?.minimumOrderQuantity}
+                          className="input input-bordered"
+                        />
+                        <div class="modal-action">
+                          <label for="update-modal" class="btn">
+                            <input type="submit" for="update-modal" />
+                          </label>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
                 </td>
               </tr>
             ))}
