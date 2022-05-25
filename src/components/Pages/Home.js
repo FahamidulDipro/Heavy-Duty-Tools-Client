@@ -6,7 +6,7 @@ import Reviews from "../Utilities/Reviews";
 import Slider from "../Utilities/Slider";
 import Summery from "../Utilities/Summery";
 import Tool from "../Utilities/Tool";
-import "./Home.css";
+
 const Home = () => {
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
@@ -49,12 +49,12 @@ const Home = () => {
           ))}
         </div>
       </div>
-
-      <div className="pagination  flex justify-center ">
+      {/* Pagination */}
+      <div className="flex justify-center btn-group mb-10">
         {[...Array(pageCount).keys()].map((num) => (
           <button
             keys={num}
-            className={page === num ? "selected" : ""}
+            className={page === num ? " btn btn-active" : "btn"}
             onClick={() => setPage(num)}
           >
             {num + 1}
