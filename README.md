@@ -23,4 +23,4 @@
 * This app provides ultimate security to its users
 * Each and every route are protected with JWT (JSON Web Tokens), and it is safe from any unauthorized activities.
 
-#### Live Website Link:
+#### Live Website Link:https://heavy-duty-tools.web.app/
