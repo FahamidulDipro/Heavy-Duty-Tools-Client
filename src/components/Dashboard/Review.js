@@ -1,9 +1,14 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import auth from "../../firebase.init";
 const Review = () => {
   const { register, handleSubmit } = useForm();
+  const [user] = useAuthState(auth);
+  const reviewerName = user?.displayName;
+  const reviewerEmail = user?.email;
   const onSubmit = (data) => {
-    fetch("http://localhost:5000/tools", {
+    fetch("http://localhost:5000/reviews", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -21,15 +26,25 @@ const Review = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <h1 className="text-3xl text-left text-blue-500 mb-10">Add A Review</h1>
+
         <label className="label">
           <span className="label-text">Reviewer Name</span>
         </label>
         <input
           type="text"
-          className="input input-bordered disabled:placeholder-black"
+          value={reviewerName}
+          className="textarea input-bordered disabled:placeholder-black"
           {...register("name")}
         />
-
+        <label className="label">
+          <span className="label-text">Email</span>
+        </label>
+        <input
+          type="email"
+          value={reviewerEmail}
+          className="textarea input-bordered disabled:placeholder-black"
+          {...register("email")}
+        />
         <label className="label">
           <span className="label-text">Write Your Review</span>
         </label>
@@ -37,14 +52,14 @@ const Review = () => {
           type="text"
           className="textarea input-bordered disabled:placeholder-black"
           placeholder="Your Review"
-          {...register("shortDescription")}
+          {...register("review")}
         />
         <label className="label">
           <span className="label-text">Give A Rating</span>
         </label>
         <input
           type="number"
-          {...register("availableQuantity")}
+          {...register("ratings")}
           className="input input-bordered"
         />
 
