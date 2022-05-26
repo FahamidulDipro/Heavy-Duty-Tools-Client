@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import Footer from "../Utilities/Footer";
 import Loading from "../Utilities/Loading";
+import Options from "../Utilities/Options";
 import Reviews from "../Utilities/Reviews";
 import Slider from "../Utilities/Slider";
+import Subscribe from "../Utilities/WriteUs";
 import Summery from "../Utilities/Summery";
 import Tool from "../Utilities/Tool";
+import Write from "../Utilities/WriteUs";
 
 const Home = () => {
   const [pageCount, setPageCount] = useState(0);
@@ -66,6 +69,10 @@ const Home = () => {
       <Summery></Summery>
       <h1 className="text-3xl font-bold uppercase">Reviews</h1>
       <Reviews></Reviews>
+      <h1 className="text-3xl font-bold uppercase my-10">Purchasing Tools Now Very simple</h1>
+       <Options></Options>
+       <h1 className="text-3xl font-bold uppercase my-10">Write Us</h1>
+      <Write></Write>
       <Footer></Footer>
     </div>
   );
