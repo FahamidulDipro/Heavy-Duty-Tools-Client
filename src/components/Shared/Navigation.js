@@ -21,6 +21,13 @@ const Navigation = () => {
     </Link>
   
   </li>
+  <li tabIndex="0">
+    <Link to="/portfolio" className="justify-between font-bold">
+   Portfolio
+  
+    </Link>
+  
+  </li>
   <li><Link to="/blog" className='font-bold'>Blog</Link></li>
   {
     user?<li><Link to="/dashboard" className='font-bold'>Dashboard</Link></li>:null

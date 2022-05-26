@@ -21,6 +21,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequireAdmin from "./components/Utilities/RequireAdmin";
 import Payment from "./components/Dashboard/Payment";
+import Portfolio from "./components/Pages/Portfolio";
 function App() {
   return (
     <div className="App">
@@ -88,6 +89,7 @@ function App() {
             }
           ></Route>
         </Route>
+        <Route path="/portfolio" element={<Portfolio></Portfolio>}></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
     </div>

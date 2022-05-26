@@ -108,7 +108,7 @@ const ManageProducts = () => {
                   <div class="modal">
                     <div class="modal-box">
                       <h3 class="font-bold text-lg">
-                        Are you sure you want to delete {tool?.name}?
+                        Are you sure you want to delete?
                       </h3>
 
                       <div class="modal-action">
