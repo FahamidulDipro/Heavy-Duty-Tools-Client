@@ -7,7 +7,9 @@ const Review = () => {
   const [user] = useAuthState(auth);
   const reviewerName = user?.displayName;
   const reviewerEmail = user?.email;
+  const reviewerImg = user?.photoURL;
   const onSubmit = (data) => {
+ 
     fetch("http://localhost:5000/reviews", {
       method: "POST",
       headers: {
@@ -33,6 +35,7 @@ const Review = () => {
         <input
           type="text"
           value={reviewerName}
+ 
           className="textarea input-bordered disabled:placeholder-black"
           {...register("name")}
         />
@@ -42,8 +45,20 @@ const Review = () => {
         <input
           type="email"
           value={reviewerEmail}
+      
           className="textarea input-bordered disabled:placeholder-black"
           {...register("email")}
+        />
+     
+        <label className="label">
+          <span className="label-text">Photo</span>
+        </label>
+        <input
+          type="text"
+          value={reviewerImg}
+      
+          className="textarea input-bordered disabled:placeholder-black"
+          {...register("image")}
         />
         <label className="label">
           <span className="label-text">Write Your Review</span>
