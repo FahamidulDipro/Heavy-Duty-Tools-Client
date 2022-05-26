@@ -2,11 +2,11 @@ import React from "react";
 
 const Slider = () => {
   return (
-    <div className="carousel w-full">
-      <div id="slide1" className="carousel-item relative w-full">
+    <div className="carousel ">
+      <div id="slide1" className="carousel-item relative w-full ">
         <img
-          src="https://azcd.harveynorman.com.au/media/catalog/product/6/8/68.010_1_1.jpg"
-          className="w-full h-3/4"
+          src="https://wallpaperaccess.com/full/1880053.jpg"
+          className="w-full h-screen "
           alt="carouselImage"
         />{" "}
         /
@@ -21,8 +21,8 @@ const Slider = () => {
       </div>
       <div id="slide2" className="carousel-item relative w-full">
         <img
-          src="https://i.pinimg.com/originals/0a/8d/cd/0a8dcd12a8aae282b12e3e6e1e895675.jpg"
-          className="w-full h-3/4	"
+          src="https://housegrail.com/wp-content/uploads/2021/08/types-of-hammers.png"
+          className="w-full  h-screen"
           alt="carouselImage"
         />{" "}
         /
@@ -37,8 +37,8 @@ const Slider = () => {
       </div>
       <div id="slide3" className="carousel-item relative w-full">
         <img
-          src="https://www.desktopbackground.org/download/1600x900/2013/06/17/593211_tools-wrench-ketly-metalic-iron-4k-ultra-hd-wallpapers_2560x1440_h.jpg"
-          className="w-full h-3/4	"
+          src="https://engineeringlearn.com/wp-content/uploads/2021/02/Types-of-Hammer.jpg"
+          className="w-full h-screen	"
           alt="carouselImage"
         />{" "}
         /
@@ -54,7 +54,7 @@ const Slider = () => {
       <div id="slide4" className="carousel-item relative w-full">
         <img
           src="https://www.steinel.net/out/media/blockbild_1/generated/1600__/94695_Feinstaubfilter_Verformen.jpg"
-          className="w-full h-3/4"
+          className="w-full  h-screen"
           alt="carouselImage"
         />{" "}
         /
