@@ -15,22 +15,22 @@ const ManageProducts = () => {
   );
   const handleDeleteTools = (id) => {
     const foundToolForDelete = tools.find((tool) => tool._id === id);
-    // fetch(`http://localhost:5000/tool/${foundToolForDelete._id}`, {
-    //   method: "DELETE",
-    //   headers: {
-    //     "content-type": "application/json",
-    //     authorization: `bearer ${localStorage.getItem("accessToken")}`,
-    //   },
-    //   body: JSON.stringify(foundToolForDelete),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.deletedCount > 0) {
-    //       toast.success("Tool Removed Successfully!");
-    //       refetch();
-    //       console.log(data);
-    //     }
-    //   });
+    fetch(`http://localhost:5000/tool/${foundToolForDelete._id}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify(foundToolForDelete),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          toast.success("Tool Removed Successfully!");
+          refetch();
+          console.log(data);
+        }
+      });
     console.log(foundToolForDelete);
   };
 
@@ -100,9 +100,6 @@ const ManageProducts = () => {
                     <AiFillDelete
                       className="text-3xl text-red-500 "
                       for="my-modal"
-                      onClick={() => {
-                        handleDeleteTools(tool?._id);
-                      }}
                     ></AiFillDelete>
                   </label>
 

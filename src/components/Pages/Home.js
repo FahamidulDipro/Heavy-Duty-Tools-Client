@@ -41,7 +41,7 @@ const Home = () => {
   return (
     <div>
       <Slider></Slider>
-      <h1 className="text-3xl font-bold uppercase">Tools We Provide </h1>
+      <h1 className="text-3xl font-bold uppercase mt-20">Tools We Provide </h1>
       <div className="flex justify-center">
         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 grid-cols-1 gap-10  my-20">
           {tools.map((tool) => (
