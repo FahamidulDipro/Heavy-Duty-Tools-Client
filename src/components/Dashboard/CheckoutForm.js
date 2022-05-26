@@ -16,7 +16,7 @@ const CheckoutForm = ({ total, order }) => {
   const [transactionId, setTransactionId] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/create_payment_intent", {
+    fetch("https://rocky-sierra-92602.herokuapp.com/create_payment_intent", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -80,7 +80,7 @@ const CheckoutForm = ({ total, order }) => {
         toolForPayment: _id,
         transactionId: paymentIntent.id,
       };
-      fetch(`http://localhost:5000/order/${_id}`, {
+      fetch(`https://rocky-sierra-92602.herokuapp.com/order/${_id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",

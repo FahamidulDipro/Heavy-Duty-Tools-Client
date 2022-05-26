@@ -10,13 +10,13 @@ const ManageAllOrders = () => {
     isLoading,
     refetch,
   } = useQuery("allOrders", () =>
-    fetch("http://localhost:5000/orders").then((res) => res.json())
+    fetch("https://rocky-sierra-92602.herokuapp.com/orders").then((res) => res.json())
   );
 
   // const [approved,setApproved] = useState(false);
   const handleShipment = (id) => {
     const foundOrder = orders.find((order) => order._id === id);
-    fetch(`http://localhost:5000/order/${foundOrder._id}`, {
+    fetch(`https://rocky-sierra-92602.herokuapp.com/order/${foundOrder._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -32,7 +32,7 @@ const ManageAllOrders = () => {
   };
   const cancelOrderHandler = (id) => {
     const foundOrderForCancel = orders.find((order) => order._id === id);
-    fetch(`http://localhost:5000/order/${foundOrderForCancel._id}`, {
+    fetch(`https://rocky-sierra-92602.herokuapp.com/order/${foundOrderForCancel._id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",

@@ -11,11 +11,11 @@ const ManageProducts = () => {
     isLoading,
     refetch,
   } = useQuery("allTools", () =>
-    fetch("http://localhost:5000/tools").then((res) => res.json())
+    fetch("https://rocky-sierra-92602.herokuapp.com/tools").then((res) => res.json())
   );
   const handleDeleteTools = (id) => {
     const foundToolForDelete = tools.find((tool) => tool._id === id);
-    fetch(`http://localhost:5000/tool/${foundToolForDelete._id}`, {
+    fetch(`https://rocky-sierra-92602.herokuapp.com/tool/${foundToolForDelete._id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",

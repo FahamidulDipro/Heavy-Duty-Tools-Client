@@ -14,7 +14,7 @@ const Purchase = () => {
   const {
     refetch,
   } = useQuery("toolsData", () =>
-    fetch("http://localhost:5000/tools").then((res) => res.json())
+    fetch("https://rocky-sierra-92602.herokuapp.com/tools").then((res) => res.json())
   );
 
   const { toolId } = useParams();
@@ -82,7 +82,7 @@ const Purchase = () => {
     };
     //For adding Orders to database
     
-    fetch("http://localhost:5000/orders", {
+    fetch("https://rocky-sierra-92602.herokuapp.com/orders", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -113,7 +113,7 @@ const Purchase = () => {
         availableQuantity: availableToolQuantity,
       };
 
-      fetch("http://localhost:5000/tools", {
+      fetch("https://rocky-sierra-92602.herokuapp.com/tools", {
         method: "PUT",
         headers: {
           "content-type": "application/json",

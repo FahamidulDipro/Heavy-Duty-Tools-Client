@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 const AddTool = () => {
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    fetch("http://localhost:5000/tools", {
+    fetch("https://rocky-sierra-92602.herokuapp.com/tools", {
       method: "POST",
       headers: {
         "content-type": "application/json",

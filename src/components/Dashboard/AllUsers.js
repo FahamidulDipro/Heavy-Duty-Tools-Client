@@ -12,7 +12,7 @@ const AllUsers = () => {
     isLoading,
     refetch,
   } = useQuery("allUsers", () =>
-    fetch("http://localhost:5000/users", {
+    fetch("https://rocky-sierra-92602.herokuapp.com/users", {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -23,7 +23,7 @@ const AllUsers = () => {
 
   //Making a user Admin
   const makeAdmin = (email, name) => {
-    fetch(`http://localhost:5000/user/admin/${email}`, {
+    fetch(`https://rocky-sierra-92602.herokuapp.com/user/admin/${email}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -45,7 +45,7 @@ const AllUsers = () => {
   //Deleting Users
   const handleDeleteUser = (id) => {
     const foundUserForDelete = users.find((user) => user._id === id);
-    fetch(`http://localhost:5000/user/${foundUserForDelete._id}`, {
+    fetch(`https://rocky-sierra-92602.herokuapp.com/user/${foundUserForDelete._id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",

@@ -11,7 +11,7 @@ const MyProfile = () => {
 
     refetch,
   } = useQuery("profileData", () =>
-    fetch(`http://localhost:5000/profiles`, {
+    fetch(`https://rocky-sierra-92602.herokuapp.com/profiles`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -37,7 +37,7 @@ const MyProfile = () => {
       linkedin: event.target.linkedin.value,
     };
 
-    fetch(`http://localhost:5000/profile/:${user?.email}`, {
+    fetch(`https://rocky-sierra-92602.herokuapp.com/profile/:${user?.email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

@@ -10,7 +10,7 @@ const Review = () => {
   const reviewerEmail = user?.email;
   const reviewerImg = user?.photoURL;
   const onSubmit = (data) => {
-    fetch("http://localhost:5000/reviews", {
+    fetch("https://rocky-sierra-92602.herokuapp.com/reviews", {
       method: "POST",
       headers: {
         "content-type": "application/json",

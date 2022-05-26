@@ -20,7 +20,7 @@ const Home = () => {
     isLoading,
     refetch,
   } = useQuery(["toolsData", page, size], () =>
-    fetch(`http://localhost:5000/tools?page=${page}&size=${size}`).then(
+    fetch(`https://rocky-sierra-92602.herokuapp.com/tools?page=${page}&size=${size}`).then(
       (res) => {
         refetch();
         return res.json();
@@ -28,7 +28,7 @@ const Home = () => {
     )
   );
   useEffect(() => {
-    fetch("http://localhost:5000/toolCount")
+    fetch("https://rocky-sierra-92602.herokuapp.com/toolCount")
       .then((res) => res.json())
       .then((data) => {
         const count = data.count;

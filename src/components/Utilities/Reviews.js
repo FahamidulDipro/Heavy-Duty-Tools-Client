@@ -13,14 +13,14 @@ const Reviews = () => {
     isLoading,
     refetch,
   } = useQuery(["allReviews", page, size], () =>
-    fetch(`http://localhost:5000/reviews?page=${page}&size=${size}`, {
+    fetch(`https://rocky-sierra-92602.herokuapp.com/reviews?page=${page}&size=${size}`, {
       method: "GET",
       
     }).then((res) => res.json())
   );
   //Review count
   useEffect(() => {
-    fetch("http://localhost:5000/reviewCount")
+    fetch("https://rocky-sierra-92602.herokuapp.com/reviewCount")
       .then((res) => res.json())
       .then((data) => {
         const count = data.count;

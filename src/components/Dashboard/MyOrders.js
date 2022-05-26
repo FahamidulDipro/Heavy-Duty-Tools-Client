@@ -17,7 +17,7 @@ const MyOrders = () => {
     isLoading,
     refetch,
   } = useQuery("toolsData", () =>
-    fetch(`http://localhost:5000/orders/${user.email}`, {
+    fetch(`https://rocky-sierra-92602.herokuapp.com/orders/${user.email}`, {
       method: "GET",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -33,7 +33,7 @@ const MyOrders = () => {
   );
   const handleDeleteMyOrder = (id) => {
     const foundOrderForCancel = orders.find((order) => order._id === id);
-    fetch(`http://localhost:5000/my_order/${foundOrderForCancel._id}`, {
+    fetch(`https://rocky-sierra-92602.herokuapp.com/my_order/${foundOrderForCancel._id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",

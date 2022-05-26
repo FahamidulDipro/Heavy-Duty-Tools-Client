@@ -7,7 +7,7 @@ const useTools = () => {
         isLoading,
         refetch,
       } = useQuery("toolsData", () =>
-        fetch("http://localhost:5000/tools").then((res) => res.json())
+        fetch("https://rocky-sierra-92602.herokuapp.com/tools").then((res) => res.json())
       );
     return [tools,isLoading,refetch]
 };
