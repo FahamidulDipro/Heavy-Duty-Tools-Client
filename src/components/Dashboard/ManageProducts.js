@@ -4,7 +4,7 @@ import { AiOutlinePlus, AiFillDelete } from "react-icons/ai";
 import { toast, ToastContainer } from "react-toastify";
 import { useForm } from "react-hook-form";
 import AddTool from "./AddTool";
-import UpdateProduct from "./UpdateProduct";
+
 const ManageProducts = () => {
   const {
     data: tools,
@@ -73,7 +73,6 @@ const ManageProducts = () => {
               <th>Minimum Order Quantity</th>
               <th>Price</th>
               <th>Remove</th>
-              <th>Update</th>
             </tr>
           </thead>
           <tbody>
