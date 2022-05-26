@@ -53,7 +53,7 @@ const Home = () => {
       <div className="flex justify-center btn-group mb-10">
         {[...Array(pageCount).keys()].map((num) => (
           <button
-            keys={num}
+            key={num}
             className={page === num ? " btn btn-active" : "btn"}
             onClick={() => setPage(num)}
           >

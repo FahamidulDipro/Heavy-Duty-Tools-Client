@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import { toast, ToastContainer } from "react-toastify";
 import auth from "../../firebase.init";
 const Review = () => {
   const { register, handleSubmit } = useForm();
@@ -9,7 +10,6 @@ const Review = () => {
   const reviewerEmail = user?.email;
   const reviewerImg = user?.photoURL;
   const onSubmit = (data) => {
- 
     fetch("http://localhost:5000/reviews", {
       method: "POST",
       headers: {
@@ -19,7 +19,13 @@ const Review = () => {
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((result) => console.log(result));
+      .then((result) => {
+        if (result?.insertedId) {
+          toast.success("Review Added Successfully");
+        }
+
+        console.log(result);
+      });
   };
   return (
     <div className="flex justify-center  w-full items-center h-screen ">
@@ -28,14 +34,13 @@ const Review = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <h1 className="text-3xl text-left text-blue-500 mb-10">Add A Review</h1>
-
+        <ToastContainer className="mt-20"></ToastContainer>
         <label className="label">
           <span className="label-text">Reviewer Name</span>
         </label>
         <input
           type="text"
           value={reviewerName}
- 
           className="textarea input-bordered disabled:placeholder-black"
           {...register("name")}
         />
@@ -45,18 +50,16 @@ const Review = () => {
         <input
           type="email"
           value={reviewerEmail}
-      
           className="textarea input-bordered disabled:placeholder-black"
           {...register("email")}
         />
-     
+
         <label className="label">
           <span className="label-text">Photo</span>
         </label>
         <input
           type="text"
           value={reviewerImg}
-      
           className="textarea input-bordered disabled:placeholder-black"
           {...register("image")}
         />

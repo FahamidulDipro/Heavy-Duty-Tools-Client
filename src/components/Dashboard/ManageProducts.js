@@ -4,6 +4,7 @@ import { AiOutlinePlus, AiFillDelete } from "react-icons/ai";
 import { toast, ToastContainer } from "react-toastify";
 import { useForm } from "react-hook-form";
 import AddTool from "./AddTool";
+import UpdateProduct from "./UpdateProduct";
 const ManageProducts = () => {
   const {
     data: tools,
@@ -14,32 +15,29 @@ const ManageProducts = () => {
   );
   const handleDeleteTools = (id) => {
     const foundToolForDelete = tools.find((tool) => tool._id === id);
-    fetch(`http://localhost:5000/tool/${foundToolForDelete._id}`, {
-      method: "DELETE",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-      body: JSON.stringify(foundToolForDelete),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.deletedCount > 0) {
-          toast.success("Tool Removed Successfully!");
-          refetch();
-          console.log(data);
-        }
-      });
+    // fetch(`http://localhost:5000/tool/${foundToolForDelete._id}`, {
+    //   method: "DELETE",
+    //   headers: {
+    //     "content-type": "application/json",
+    //     authorization: `bearer ${localStorage.getItem("accessToken")}`,
+    //   },
+    //   body: JSON.stringify(foundToolForDelete),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.deletedCount > 0) {
+    //       toast.success("Tool Removed Successfully!");
+    //       refetch();
+    //       console.log(data);
+    //     }
+    //   });
+    console.log(foundToolForDelete);
   };
 
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-  };
-  const [toolName, setToolName] = useState("");
   return (
     <div className="mt-10 p-10">
       <h1 className="text-3xl my-10 text-left text-blue-500 flex justify-between">
+        <ToastContainer className="mt-20"></ToastContainer>
         Manage Products{" "}
         <label
           for="add-modal"
@@ -63,7 +61,7 @@ const ManageProducts = () => {
         </div>
       </h1>
       <ToastContainer className="mt-20"></ToastContainer>
-      <div class="overflow-x-auto">
+      <div className="w-full">
         <table class="table w-full">
           <thead>
             <tr>
@@ -103,6 +101,9 @@ const ManageProducts = () => {
                     <AiFillDelete
                       className="text-3xl text-red-500 "
                       for="my-modal"
+                      onClick={() => {
+                        handleDeleteTools(tool?._id);
+                      }}
                     ></AiFillDelete>
                   </label>
 
@@ -129,76 +130,6 @@ const ManageProducts = () => {
                           Confirm Delete
                         </label>
                       </div>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <label
-                    for="update-modal"
-                    class="btn btn-xs modal-button bg-blue-500 text-white border-0"
-                  >
-                    UPDATE
-                  </label>
-
-                  <input
-                    type="checkbox"
-                    id="update-modal"
-                    class="modal-toggle"
-                  />
-                  <div class="modal">
-                    <div class="modal-box">
-                      <h3 class="font-bold text-lg mb-10">
-                        Update Tool Information
-                      </h3>
-                      {/* Form */}
-                      <form
-                        className="form-control"
-                        onSubmit={handleSubmit(onSubmit)}
-                      >
-                        <label className="label">
-                          <span className="label-text">Tool Name</span>
-                        </label>
-                        <input
-                          type="text"
-                          value={tool?.name}
-                          className="input input-bordered disabled:placeholder-black"
-                          {...register("toolName")}
-                        />
-                        <label className="label">
-                          <span className="label-text">Description</span>
-                        </label>
-                        <input
-                          type="text"
-                          value={tool?.shortDescription}
-                          className="input input-bordered disabled:placeholder-black"
-                          {...register("shortDescription")}
-                        />
-                        <label className="label">
-                          <span className="label-text">Available Quantity</span>
-                        </label>
-                        <input
-                          type="text"
-                          {...register("availableQuantity")}
-                          value={tool?.availableQuantity}
-                          className="input input-bordered"
-                        />
-                        <label className="label">
-                          <span className="label-text">
-                            Minimum Order Quantity
-                          </span>
-                        </label>
-                        <input
-                          type="text"
-                          {...register("minimumOrderQuantity")}
-                          value={tool?.minimumOrderQuantity}
-                          className="input input-bordered"
-                        />
-                        <div class="modal-action">
-                          <label for="update-modal" class="btn">
-                            <input type="submit" for="update-modal" />
-                          </label>
-                        </div>
-                      </form>
                     </div>
                   </div>
                 </td>
